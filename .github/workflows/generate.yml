@@ -30,7 +30,7 @@ jobs:
           curl -sL "https://raw.githubusercontent.com/stalwartlabs/stalwart/main/api/v1/openapi.yml" -o api/openapi.yml
 
       - name: Patch spec (fix upstream duplicates)
-        run: make patch-spec
+        run: python3 patch_spec.py
 
       - name: Generate client
         run: go generate ./...

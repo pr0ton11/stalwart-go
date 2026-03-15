@@ -14,12 +14,7 @@ fetch-spec:
 # Patch known issues in the upstream spec (e.g. duplicate /reload/ path)
 # Removes any path entry that is a duplicate with a trailing slash (e.g. /reload/:)
 patch-spec:
-	@python3 -c "\
-	import re, sys; \
-	content = open('$(SPEC_FILE)').read(); \
-	content = re.sub(r'\n  /reload/:\n    get:.*?(?=\n  /[^ ])', '', content, flags=re.DOTALL); \
-	open('$(SPEC_FILE)', 'w').write(content); \
-	print('Spec patched successfully')"
+	@python3 patch_spec.py $(SPEC_FILE)
 
 # Generate Go client from OpenAPI spec
 generate: fetch-spec patch-spec
